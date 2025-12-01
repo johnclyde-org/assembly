@@ -9,7 +9,7 @@ SOURCES = $(wildcard *.s)
 OBJECTS = $(SOURCES:.s=.o)
 PROGRAMS = $(SOURCES:.s=)
 
-.PHONY: all clean run-hello run-factorial run-fizzbuzz
+.PHONY: all clean run-hello run-factorial run-fizzbuzz run-fileio run-ascii_art
 
 all: $(PROGRAMS)
 
@@ -27,6 +27,12 @@ factorial: factorial.o
 fizzbuzz: fizzbuzz.o
 	$(LD) $(LDFLAGS) -o $@ $<
 
+fileio: fileio.o
+	$(LD) $(LDFLAGS) -o $@ $<
+
+ascii_art: ascii_art.o
+	$(LD) $(LDFLAGS) -o $@ $<
+
 clean:
 	rm -f $(OBJECTS) $(PROGRAMS)
 	rm -rf *.dSYM
@@ -41,7 +47,15 @@ run-factorial: factorial
 run-fizzbuzz: fizzbuzz
 	./fizzbuzz
 
+run-fileio: fileio
+	./fileio
+
+run-ascii_art: ascii_art
+	./ascii_art
+
 run-all: all
 	@echo "=== Hello World ===" && ./hello
 	@echo "\n=== Factorial ===" && ./factorial
 	@echo "\n=== FizzBuzz ===" && ./fizzbuzz
+	@echo "\n=== File I/O ===" && ./fileio
+	@echo "\n=== ASCII Art ===" && ./ascii_art
